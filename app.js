@@ -4,9 +4,9 @@ const helmet = require('helmet');
 const cors = require('cors');
 const rateLimit = require('express-rate-limit');
 const authRoutes = require('./routes/authRoutes');
-const authMiddleware = require('./middleware/authMiddleware');
+const {protect, authorizeRoles} = require('./middleware/authMiddleware');
 const transactionRoutes = require('./routes/transactionRoutes');
-const errorHandler = require('./middleware/errorHandler');
+const {errorHandler} = require('./middleware/errorHandler').default;
 
 //error handler middleware
 app.use(errorHandler);
@@ -29,12 +29,12 @@ const limiter = rateLimit({
 app.use(limiter);
 
 //protect routes and authorizeRoles middleware example
-app.get('/api/test/admin-only', authMiddleware.protect, authMiddleware.authorizeRoles('admin'), (req, res) => {
+app.get('/api/test/admin-only', protect, authorizeRoles('admin'), (req, res) => {
     res.json({message: 'This is a protected route', user: req.user});
 });
 
 //mount routes
-app.use('/api/auth', authRoutes);
-app.use('/api/transactions', transactionRoutes);
+app.use('/api/auth', protect, authRoutes);
+app.use('/api/transactions', protect, transactionRoutes);
 
 module.exports = app;
