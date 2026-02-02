@@ -5,6 +5,11 @@ const cors = require('cors');
 const rateLimit = require('express-rate-limit');
 const authRoutes = require('./routes/authRoutes');
 const authMiddleware = require('./middleware/authMiddleware');
+const transactionRoutes = require('./routes/transactionRoutes');
+const errorHandler = require('./middleware/errorHandler');
+
+//error handler middleware
+app.use(errorHandler);
 
 //body parser middleware
 app.use(express.json());
@@ -30,5 +35,6 @@ app.get('/api/test/admin-only', authMiddleware.protect, authMiddleware.authorize
 
 //mount routes
 app.use('/api/auth', authRoutes);
+app.use('/api/transactions', transactionRoutes);
 
 module.exports = app;

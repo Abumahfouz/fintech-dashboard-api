@@ -32,6 +32,11 @@ const userSchema = new mongoose.Schema({
             message: props => `${props.value} is not a valid role`
         }
     },
+    balance: {
+        type: Number,
+        default: 40000,
+        min: [0, 'Balance cannot be negative']
+    },
     createdAt: {
         type: Date,
         default: Date.now
