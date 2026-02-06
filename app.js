@@ -8,6 +8,7 @@ const dashboardRoutes = require('./routes/dashboardRoutes.js');
 const {protect, authorizeRoles} = require('./middleware/authMiddleware');
 const transactionRoutes = require('./routes/transactionRoutes');
 const {errorHandler} = require('./middleware/errorHandler').default;
+const profileRoutes = require('./routes/profileRoutes');
 
 //error handler middleware
 app.use(errorHandler);
@@ -21,11 +22,11 @@ app.use(helmet());
 
 
 //configure cors middleware
-// app.use(cors({
-//     origin: 'http://localhost:5000/dashboard', // client URL
-//     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-//     credentials: true,
-// }));
+app.use(cors({
+    origin: '*', // client URL
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+}));
 
 //rate limiter middleware
 const limiter = rateLimit({
@@ -46,5 +47,8 @@ app.get('/api/test/admin-only', protect, authorizeRoles('admin'), (req, res) => 
 app.use('/api/auth', authRoutes);
 app.use('/api/v1/transactions', protect, transactionRoutes);
 app.use('/api/dashboard', protect, dashboardRoutes);
+app.use('/api/profile/upload-profile', profileRoutes); // mount profile routes
+app.use('/api/upload', express.static('uploads')); // serve uploaded files statically
+
 
 module.exports = app;

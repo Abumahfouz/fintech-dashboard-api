@@ -32,6 +32,10 @@ const userSchema = new mongoose.Schema({
             message: props => `${props.value} is not a valid role`
         }
     },
+    profileImage: {
+        type: String,
+        default: ''
+    },
     balance: {
         type: Number,
         default: 40000,

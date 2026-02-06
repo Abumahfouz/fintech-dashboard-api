@@ -24,6 +24,9 @@
      <div>
         <h3>Create Transaction</h3>
         <form id="transaction-form" action="/api/v1/transactions" method="post" style="margin-top: 20px;">
+            <p id="profileImg">
+                
+            </p>
             <label for="amount">Amount:</label>
             <input type="number" id="amount" name="amount" required><br><br>
 
@@ -41,6 +44,7 @@
             
             <button type="submit">Submit Transaction</button>
         </form>
+        <button id="logout" onclick="logout()">Logout</button>
      </div>
     <!-- recent transactions could be added here in the future -->
 </body>
