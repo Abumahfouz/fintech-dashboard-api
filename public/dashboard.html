@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <script src="dashboard.js"></script>
+</head>
+<body>
+    <!-- basic dashboard layout -->
+    <div class="dashboard-container" style="max-width: 800px; margin: 50px auto; padding: 20px;">
+        <h2 class="title" style="text-align: center;">Hi, <span id="username">!</span></h2>
+        <p>Welcome to your dashboard! Here you can view your account details and recent transactions.</p>
+        
+        <div class="account-details" style="margin-top: 30px;">
+            <h3>Account Details</h3>
+            <p><strong>Name:</strong> <span id="fullname"></span></p>
+            <p><strong>Email:</strong> <span id="email"></span></p>
+            <p><strong>Account Balance:</strong> <span id="balance"></span></p>
+        </div>
+    </div>
+    
+    <!-- create transaction -->
+     <div>
+        <h3>Create Transaction</h3>
+        <form id="transaction-form" action="/api/v1/transactions" method="post" style="margin-top: 20px;">
+            <p id="profileImg">
+                
+            </p>
+            <label for="amount">Amount:</label>
+            <input type="number" id="amount" name="amount" required><br><br>
+
+            <label for="currency">Currency:</label>
+            <input type="text" id="currency" name="currency" required><br><br>
+
+            <label for="description">Description:</label>
+            <input type="text" id="description" name="description"><br><br>
+
+            <label for="type">Type:</label>
+            <select id="type" name="type" required>
+                <option value="credit">Credit</option>
+                <option value="debit">Debit</option>
+            </select><br><br>
+            
+            <button type="submit">Submit Transaction</button>
+        </form>
+        <button id="logout" onclick="logout()">Logout</button>
+     </div>
+    <!-- recent transactions could be added here in the future -->
+</body>
+</html>
