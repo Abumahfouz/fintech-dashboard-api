@@ -9,6 +9,7 @@ const {protect, authorizeRoles} = require('./middleware/authMiddleware');
 const transactionRoutes = require('./routes/transactionRoutes');
 const {errorHandler} = require('./middleware/errorHandler').default;
 const profileRoutes = require('./routes/profileRoutes');
+const uploadRoutes = require('./routes/uploadRoutes');
 
 //error handler middleware
 app.use(errorHandler);
@@ -48,6 +49,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/v1/transactions', protect, transactionRoutes);
 app.use('/api/dashboard', protect, dashboardRoutes);
 app.use('/api/profile/upload-profile', profileRoutes); // mount profile routes
+app.use('/api/profile', uploadRoutes); // mount upload routes for image and video
 app.use('/api/upload', express.static('uploads')); // serve uploaded files statically
 
 

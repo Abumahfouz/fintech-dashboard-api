@@ -36,6 +36,9 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: ''
     },
+    videos: [{
+        type: String
+    }],
     balance: {
         type: Number,
         default: 40000,
